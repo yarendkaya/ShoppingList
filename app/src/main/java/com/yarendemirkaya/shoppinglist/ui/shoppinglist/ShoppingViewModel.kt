@@ -6,10 +6,13 @@ import com.yarendemirkaya.shoppinglist.data.repositories.ShoppingRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.koin.java.KoinJavaComponent.inject
 
 class ShoppingViewModel(
-    private val repository: ShoppingRepository
 ) :ViewModel(){
+
+    private val repository: ShoppingRepository by inject(ShoppingRepository::class.java)
+
     fun upsert(item:ShoppingItem)= CoroutineScope(Dispatchers.Main).launch {
         repository.upsert(item)
     }
