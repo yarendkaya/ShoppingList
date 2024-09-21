@@ -17,7 +17,7 @@ class AddShoppingItemDialog(context: Context, var addDialogListener: AddDialogLi
 
         findViewById<TextView>(R.id.tvAdd)?.setOnClickListener {
             val name = findViewById<EditText>(R.id.etName)?.text.toString()
-            val amount = findViewById<TextView>(R.id.tvAmount)?.text.toString()
+            val amount = findViewById<TextView>(R.id.etAmount)?.text.toString()
 
             if (amount.isEmpty() || name.isEmpty()) {
                 Toast.makeText(context, "Please enter all the information", Toast.LENGTH_SHORT)
