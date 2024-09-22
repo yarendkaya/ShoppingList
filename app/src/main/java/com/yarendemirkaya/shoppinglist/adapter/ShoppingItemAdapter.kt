@@ -19,12 +19,9 @@ class ShoppingItemAdapter(
 // function from the viewmodel inside of adapter class.
 ) : RecyclerView.Adapter<ShoppingItemAdapter.ShoppingViewHolder>() {
 
-
     inner class ShoppingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingViewHolder {
-
-
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.shopping_item, parent, false)
         return ShoppingViewHolder(view)
@@ -37,24 +34,22 @@ class ShoppingItemAdapter(
 
     override fun onBindViewHolder(holder: ShoppingViewHolder, position: Int) {
         val curShoppingItem = items[position]
+
         val builder: AlertDialog.Builder = AlertDialog.Builder(holder.itemView.context) //?
         builder
             .setMessage("Do you really want to delete this item")
             .setTitle("Delete Item")
             .setPositiveButton("YES") { dialog, which ->
-                    viewModel.delete(curShoppingItem)
-
+                viewModel.delete(curShoppingItem)
             }
             .setNegativeButton("NO") { dialog, which ->
+
                 dialog.dismiss()
             }
-
         val deleteItemDialog: AlertDialog = builder.create()
-
 
         holder.itemView.findViewById<TextView>(R.id.tvName).text = curShoppingItem.name
         holder.itemView.findViewById<TextView>(R.id.tvAmount).text = "${curShoppingItem.amount}"
-
 
         // neden setonclicklistenerlar burada?
         holder.itemView.findViewById<ImageView>(R.id.ivDelete).setOnClickListener {
@@ -74,6 +69,9 @@ class ShoppingItemAdapter(
                 } else {
                     viewModel.upsert(curShoppingItem)
                 }
+            }
+            if(curShoppingItem.amount==0){
+                deleteItemDialog.show()
             }
         }
     }
