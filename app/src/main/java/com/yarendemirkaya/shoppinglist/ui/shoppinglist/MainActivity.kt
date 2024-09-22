@@ -14,6 +14,7 @@ import com.yarendemirkaya.shoppinglist.data.db.entities.ShoppingItem
 
 class MainActivity : AppCompatActivity() {
 
+
     private val viewModel: ShoppingViewModel by viewModels<ShoppingViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
          //val database = ShoppingDatabase(this) //bunlar bad practice. DI olayına tamamen ters. tightly coupled yapmıs olursun.
          //val repository = ShoppingRepository(database)
 
-        val adapter = ShoppingItemAdapter(listOf(), viewModel)
+        val adapter = ShoppingItemAdapter(listOf(),viewModel)
         val rvShoppingItems = findViewById<RecyclerView>(R.id.rvShoppingItems)
 
         rvShoppingItems.layoutManager = LinearLayoutManager(this)
