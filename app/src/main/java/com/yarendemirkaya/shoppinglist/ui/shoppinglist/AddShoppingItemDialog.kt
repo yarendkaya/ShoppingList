@@ -32,8 +32,5 @@ class AddShoppingItemDialog(context: Context, var addDialogListener: AddDialogLi
         findViewById<TextView>(R.id.tvCancel)?.setOnClickListener {
             cancel()
         }
-
-
     }
-
 }
