@@ -35,17 +35,7 @@ class ShoppingItemAdapter(
     override fun onBindViewHolder(holder: ShoppingViewHolder, position: Int) {
         val curShoppingItem = items[position]
 
-        val builder: AlertDialog.Builder = AlertDialog.Builder(holder.itemView.context) //?
-        builder
-            .setMessage("Do you really want to delete this item")
-            .setTitle("Delete Item")
-            .setPositiveButton("YES") { dialog, which ->
-                viewModel.delete(curShoppingItem)
-            }
-            .setNegativeButton("NO") { dialog, which ->
-
-                dialog.dismiss()
-            }
+        val builder: AlertDialog.Builder = deneme(holder, curShoppingItem) //?
         val deleteItemDialog: AlertDialog = builder.create()
 
         holder.itemView.findViewById<TextView>(R.id.tvName).text = curShoppingItem.name
@@ -74,5 +64,23 @@ class ShoppingItemAdapter(
                 deleteItemDialog.show()
             }
         }
+    }
+
+    private fun deneme(
+        holder: ShoppingViewHolder,
+        curShoppingItem: ShoppingItem
+    ): AlertDialog.Builder {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(holder.itemView.context) //?
+        builder
+            .setMessage("Do you really want to delete this item")
+            .setTitle("Delete Item")
+            .setPositiveButton("YES") { dialog, which ->
+                viewModel.delete(curShoppingItem)
+            }
+            .setNegativeButton("NO") { dialog, which ->
+                curShoppingItem.amount = 1
+                dialog.dismiss()
+            }
+        return builder
     }
 }
